@@ -12,13 +12,13 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <Filter Include="includes">
+      <UniqueIdentifier>{b7b68930-cb6c-4ee4-8a59-8340fd39b2c5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
     <Library Include="includes\BitSync.lib">
       <Filter>includes</Filter>
     </Library>
-  </ItemGroup>
-  <ItemGroup>
-    <Filter Include="includes">
-      <UniqueIdentifier>{fffe01a6-4b26-4226-9ae8-7964dc43a146}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
 </Project>

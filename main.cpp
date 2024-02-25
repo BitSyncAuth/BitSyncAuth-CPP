@@ -1,9 +1,6 @@
 #include <iostream>
 #include <Windows.h>
-#include <string>
-#include <unordered_map>
-#include <cstring>
-#pragma comment(lib, "User32.lib")
+#include <iostream>
 #include "includes/BitSync.h"
 #include "includes/skCrypter.h"
 
@@ -11,52 +8,29 @@
 
 discord: https://discord.gg/DDrRr6jhG6 */
 
-std::string license_invalid = skCrypt("Invalid license!").decrypt(); //change error messages if callbacks enabled!
-std::string hwid_invalid = skCrypt("Invalid hwid!").decrypt();
-std::string subscription_expired = skCrypt("Subscription expired!").decrypt();
-
 
 int main() {
 
-    if (BitSync::init_ctx()) {
+    BitSync::init_ctx();
 
-        std::cout << skCrypt("\n   Enter key -> ").decrypt();
+    std::cout << skCrypt("\n   Enter key -> ");
 
-        std::string key;
-        std::cin >> key;
+    std::string key;
+    std::cin >> key;
+    
+    auto resp = BitSync::license_ctx(key);
 
-        auto resp = BitSync::license_ctx(key.c_str());
+    if (std::get<0>(resp) == 0x4253) {
 
-        BitSync::values ctx = BitSync::UNKNOWN;
-        std::unordered_map<std::string, BitSync::values> Login = {
-            {BitSync::get_response_invalid(), BitSync::INVALID},
-            {BitSync::get_response_expired(), BitSync::EXPIRED},
-            {BitSync::get_response_hwid(), BitSync::HWID},
-            {BitSync::get_response_success(), BitSync::SUCCESS}
-        };
-
-        auto msg = Login.find(resp);
-        if (msg != Login.end())
-        {
-            ctx = msg->second;
-        }
-
-        switch (ctx) { //error and login handling
-
-        case BitSync::INVALID:
-            BitSync::callback(license_invalid);
-            break;
-        case BitSync::EXPIRED:
-            BitSync::callback(subscription_expired);
-            break;
-        case BitSync::HWID:
-            BitSync::callback(hwid_invalid);
-            break;
-        case BitSync::SUCCESS:
-            // do something smart
-            break;
-        default:
-            break;
-        }
+        std::cout << skCrypt("\n   Welcome : ") << std::get<1>(resp); 
+        std::cout << skCrypt("\n   Product : ") << std::get<2>(resp); 
+        std::cout << skCrypt("\n   Expiry : ") << std::get<3>(resp);
     }
+
+    else {
+
+        std::cout << skCrypt("\n   Error : ") << std::get<1>(resp); 
+    }
+
+    _getwch();
 }

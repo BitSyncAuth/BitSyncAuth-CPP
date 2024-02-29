@@ -2,16 +2,18 @@
 #include <Windows.h>
 #include <iostream>
 #include "includes/BitSync.h"
-#include "includes/skCrypter.h"
 
 /*This project contains code licensed to bitsync.cc, Please purchase a valid subscription before implementing this code
 
 discord: https://discord.gg/DDrRr6jhG6 */
 
-
 int main() {
 
     BitSync::init_ctx();
+
+    BitSync::set_data(appid.c_str(), enckey.c_str());
+
+    appid.clear(); enckey.clear();
 
     std::cout << skCrypt("\n   Enter key -> ");
 

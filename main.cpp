@@ -25,8 +25,8 @@ int main() {
     if (std::get<0>(resp) == 0x4253) {
 
         std::cout << skCrypt("\n   Welcome : ") << std::get<1>(resp); 
-        std::cout << skCrypt("\n   Product : ") << std::get<2>(resp); 
-        std::cout << skCrypt("\n   Expiry : ") << std::get<3>(resp);
+        std::cout << skCrypt("\n   Product : ") << *std::get<2>(resp);
+        std::cout << skCrypt("\n   Expiry : ") << *std::get<3>(resp);
     }
 
     else {

@@ -8,7 +8,7 @@ namespace BitSync {
 	void init_ctx();
 	void set_data(std::string&& id, std::string&& pubkey);
 
-	std::tuple<int, std::string, std::string, std::string> license_ctx(std::string license);
+	std::tuple<int, std::string, const std::string*, const std::string*> license_ctx(std::string license);
 	std::string filestream(std::string license);
 }
 

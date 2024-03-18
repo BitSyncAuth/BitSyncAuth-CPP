@@ -14,6 +14,3 @@ namespace BitSync {
 
 std::string appid = skCrypt("your_appid").decrypt();
 std::string enckey = skCrypt("your_enckey").decrypt();
-
-
-

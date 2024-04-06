@@ -18,7 +18,7 @@ int main() {
     
     auto resp = BitSync::license_ctx(key);
 
-    if (std::get<0>(resp) == 0x4253) {
+    if (std::get<0>(resp) == 100) { // update your checksum value here
 
         std::cout << skCrypt("\n   Welcome : ") << std::get<1>(resp); 
         std::cout << skCrypt("\n   Product : ") << *std::get<2>(resp);
